@@ -1,0 +1,10 @@
+<div class="mdc-textfield" #container>
+    <input class="mdc-textfield__input" type="text" #control=ngModel [ngModel]="getProp(target,prop)" (ngModelChange)="setProp(target,prop,$event)"
+        [attr.name]="name" [rule]="rule" [setValidity]="setValidity" />
+    <label class="mdc-textfield__label">{{text}}</label>
+</div>
+<ng-container *ngIf="control.dirty">
+    <p *ngFor="let error of getErrorNames()" class="mdc-textfield-helptext mdc-textfield-helptext--persistent mdc-textfield-helptext--validation-msg">
+        {{control.errors[error]}}
+    </p>
+</ng-container>
