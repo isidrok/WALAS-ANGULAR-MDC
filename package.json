@@ -2,7 +2,8 @@
   "name": "@walas/angular-mdc",
   "version": "0.0.0",
   "description": "Material Components Web wrapper for integration with WALAS-ANGULAR-CORE Edit",
-  "main": "dist/walas_angular_mdc.js",
+  "main": "dist/walas_angular_mdc.umd.js",
+  "module": "dist/walas_angular_mdc.js",
   "scripts": {
     "build": "rollup -c rollup.config.js",
     "build:dev": "rollup -c rollup.config.dev.js --watch",
@@ -41,9 +42,10 @@
     "rollup-watch": "^4.3.1"
   },
   "dependencies": {
-    "@material/textfield": "^0.4.0"
-  },
-  "peerDependencies": {
+    "@material/textfield": "^0.4.0",
     "@walas/angular-core": "git+https://github.com/Alfatecsistemas/WALAS-ANGULAR-CORE.git"
-  }
+  },
+  "files": [
+    "dist"
+  ]
 }

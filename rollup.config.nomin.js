@@ -1,6 +1,8 @@
 import config from './rollup.config.js';
 
 config.plugins.pop(); // remove uglify
-config.dest = 'dist/walas_angular_mdc.js';
-config.sourceMapFile = 'dist/walas_angular_mdc.js.map';
+config.targets = [
+    {dest: 'dist/walas_angular_mdc.umd.js', format: 'umd'},
+    {dest: 'dist/walas_angular_mdc.js', format: 'es'},
+];
 export default config;
