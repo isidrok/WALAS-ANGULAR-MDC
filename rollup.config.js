@@ -3,6 +3,9 @@ import resolve from 'rollup-plugin-node-resolve';
 import string from 'rollup-plugin-string';
 import uglify from 'rollup-plugin-uglify';
 import commonjs from 'rollup-plugin-commonjs';
+import postcss from 'rollup-plugin-postcss';
+import easyImport from 'postcss-easy-import';
+import cssnext from 'postcss-cssnext';
 
 const NAMESPACE = require('./namespace.config.json').namespace;
 const getModuleName = function(name) {
@@ -21,6 +24,13 @@ export default {
     plugins: [
         string({
             include: '**/*.html'
+        }),
+        postcss({
+            plugins: [
+                easyImport(),
+                cssnext()
+            ],
+            extract: 'dist/walas_angular_mdc.css'
         }),
         resolve(),
         commonjs({

@@ -1,7 +1,7 @@
 {
   "name": "@walas/angular-mdc",
   "version": "0.0.0",
-  "description": "Material Components Web wrapper for integration with WALAS-ANGULAR-CORE Edit",
+  "description": "Material Components Web wrapper for integration with WALAS-ANGULAR-CORE",
   "main": "dist/walas_angular_mdc.umd.js",
   "module": "dist/walas_angular_mdc.js",
   "scripts": {
@@ -31,11 +31,14 @@
     "eslint": "^4.2.0",
     "eslint-config-google": "^0.9.1",
     "npm-run-all": "^4.1.1",
+    "postcss-cssnext": "^3.0.2",
+    "postcss-easy-import": "^2.1.0",
     "rollup": "^0.41.6",
     "rollup-plugin-babel": "^2.7.1",
     "rollup-plugin-commonjs": "^8.0.2",
     "rollup-plugin-livereload": "^0.6.0",
     "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-postcss": "^0.5.5",
     "rollup-plugin-serve": "^0.4.2",
     "rollup-plugin-string": "^2.0.2",
     "rollup-plugin-uglify": "^1.0.2",
