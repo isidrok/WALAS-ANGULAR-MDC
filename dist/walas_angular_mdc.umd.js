@@ -74627,6 +74627,153 @@ var possibleConstructorReturn$1 = function (self, call) {
   return call && (typeof call === "object" || typeof call === "function") ? call : self;
 };
 
+var _dec$3$1;
+var _dec2$1$1;
+var _dec3$1$1;
+var _dec4;
+var _class$3$1;
+var _descriptor$1$1;
+var _descriptor2$1$1;
+var _descriptor3;
+var _descriptor4;
+
+function _initDefineProp$1$1(target, property, descriptor, context) {
+    if (!descriptor) return;
+    Object.defineProperty(target, property, {
+        enumerable: descriptor.enumerable,
+        configurable: descriptor.configurable,
+        writable: descriptor.writable,
+        value: descriptor.initializer ? descriptor.initializer.call(context) : void 0
+    });
+}
+
+function _applyDecoratedDescriptor$1$1(target, property, decorators, descriptor, context) {
+    var desc = {};
+    Object['ke' + 'ys'](descriptor).forEach(function (key) {
+        desc[key] = descriptor[key];
+    });
+    desc.enumerable = !!desc.enumerable;
+    desc.configurable = !!desc.configurable;
+
+    if ('value' in desc || desc.initializer) {
+        desc.writable = true;
+    }
+
+    desc = decorators.slice().reverse().reduce(function (desc, decorator) {
+        return decorator(target, property, desc) || desc;
+    }, desc);
+
+    if (context && desc.initializer !== void 0) {
+        desc.value = desc.initializer ? desc.initializer.call(context) : void 0;
+        desc.initializer = undefined;
+    }
+
+    if (desc.initializer === void 0) {
+        Object['define' + 'Property'](target, property, desc);
+        desc = null;
+    }
+
+    return desc;
+}
+
+var BaseComponent = (_dec$3$1 = Input(), _dec2$1$1 = Input(), _dec3$1$1 = ViewChild('container'), _dec4 = ViewChild('control'), (_class$3$1 = function () {
+    function BaseComponent(formService, ngZone) {
+        var _this = this;
+
+        classCallCheck$1(this, BaseComponent);
+
+        _initDefineProp$1$1(this, 'text', _descriptor$1$1, this);
+
+        _initDefineProp$1$1(this, 'rule', _descriptor2$1$1, this);
+
+        _initDefineProp$1$1(this, 'container', _descriptor3, this);
+
+        _initDefineProp$1$1(this, 'control', _descriptor4, this);
+
+        this.target = null;
+        this.prop = null;
+        this.name = null;
+
+        this.setValidity = function (valid) {
+            if (_this.control && !_this.control.dirty) {
+                return;
+            }
+            var validity = valid ? '' : 'invalid';
+            _this._inputElement.setCustomValidity(validity);
+            if (!valid) {
+                _this._ngZone.runOutsideAngular(function () {
+                    return _this.setProp(_this.target, _this.prop, undefined);
+                });
+            }
+        };
+
+        this._formService = formService;
+        this._ngZone = ngZone;
+        this._nativeElement = null;
+        this._inputElement = null;
+        this._mdcComponent = null;
+    }
+
+    createClass$1$1(BaseComponent, [{
+        key: 'getProp',
+        value: function getProp(target, prop) {
+            return target[prop];
+        }
+    }, {
+        key: 'setProp',
+        value: function setProp(target, prop, value) {
+            target[prop] = value;
+        }
+    }, {
+        key: 'getErrorNames',
+        value: function getErrorNames() {
+            return Object.keys(this.control.errors || {});
+        }
+    }, {
+        key: 'ngOnInit',
+        value: function ngOnInit() {
+            if (!this.container) {
+                throw new Error('No container');
+            }
+            this._nativeElement = this.container.nativeElement;
+            this._inputElement = this._nativeElement.children[0];
+        }
+    }, {
+        key: 'ngAfterViewInit',
+        value: function ngAfterViewInit() {
+            this._formService.addControl(this.control, this.name);
+        }
+    }, {
+        key: 'ngOnDestroy',
+        value: function ngOnDestroy() {
+            this._mdcComponent && this._mdcComponent.destroy();
+            this._nativeElement = null;
+            this._inputElement = null;
+        }
+    }]);
+    return BaseComponent;
+}(), (_descriptor$1$1 = _applyDecoratedDescriptor$1$1(_class$3$1.prototype, 'text', [_dec$3$1], {
+    enumerable: true,
+    initializer: function initializer() {
+        return null;
+    }
+}), _descriptor2$1$1 = _applyDecoratedDescriptor$1$1(_class$3$1.prototype, 'rule', [_dec2$1$1], {
+    enumerable: true,
+    initializer: function initializer() {
+        return null;
+    }
+}), _descriptor3 = _applyDecoratedDescriptor$1$1(_class$3$1.prototype, 'container', [_dec3$1$1], {
+    enumerable: true,
+    initializer: function initializer() {
+        return this.container;
+    }
+}), _descriptor4 = _applyDecoratedDescriptor$1$1(_class$3$1.prototype, 'control', [_dec4], {
+    enumerable: true,
+    initializer: function initializer() {
+        return this.control;
+    }
+})), _class$3$1));
+
 /**
  * Copyright 2016 Google Inc.
  *
@@ -76404,157 +76551,28 @@ var MDCTextfield = function (_MDCComponent) {
 var html$1 = "<div class=\"mdc-textfield\" #container>\n    <input class=\"mdc-textfield__input\" type=\"text\" #control=ngModel [ngModel]=\"getProp(target,prop)\" (ngModelChange)=\"setProp(target,prop,$event)\"\n        [attr.name]=\"name\" [rule]=\"rule\" [setValidity]=\"setValidity\" />\n    <label class=\"mdc-textfield__label\">{{text}}</label>\n</div>\n<ng-container *ngIf=\"control.dirty\">\n    <p *ngFor=\"let error of getErrorNames()\" class=\"mdc-textfield-helptext mdc-textfield-helptext--persistent mdc-textfield-helptext--validation-msg\">\n        {{control.errors[error]}}\n    </p>\n</ng-container>";
 
 var _dec$2$1;
-var _dec2$1$1;
-var _dec3$1$1;
-var _dec4;
-var _dec5;
 var _class$2$1;
-var _class2$1$1;
-var _descriptor$1$1;
-var _descriptor2$1$1;
-var _descriptor3;
-var _descriptor4;
-
-function _initDefineProp$1$1(target, property, descriptor, context) {
-    if (!descriptor) return;
-    Object.defineProperty(target, property, {
-        enumerable: descriptor.enumerable,
-        configurable: descriptor.configurable,
-        writable: descriptor.writable,
-        value: descriptor.initializer ? descriptor.initializer.call(context) : void 0
-    });
-}
-
-function _applyDecoratedDescriptor$1$1(target, property, decorators, descriptor, context) {
-    var desc = {};
-    Object['ke' + 'ys'](descriptor).forEach(function (key) {
-        desc[key] = descriptor[key];
-    });
-    desc.enumerable = !!desc.enumerable;
-    desc.configurable = !!desc.configurable;
-
-    if ('value' in desc || desc.initializer) {
-        desc.writable = true;
-    }
-
-    desc = decorators.slice().reverse().reduce(function (desc, decorator) {
-        return decorator(target, property, desc) || desc;
-    }, desc);
-
-    if (context && desc.initializer !== void 0) {
-        desc.value = desc.initializer ? desc.initializer.call(context) : void 0;
-        desc.initializer = undefined;
-    }
-
-    if (desc.initializer === void 0) {
-        Object['define' + 'Property'](target, property, desc);
-        desc = null;
-    }
-
-    return desc;
-}
 
 var AfInput = (_dec$2$1 = Component({
     selector: 'af-input',
     template: html$1
-}), _dec2$1$1 = Input(), _dec3$1$1 = Input(), _dec4 = ViewChild('container'), _dec5 = ViewChild('control'), _dec$2$1(_class$2$1 = (_class2$1$1 = function () {
+}), _dec$2$1(_class$2$1 = function (_BaseComponent) {
+    inherits$1(AfInput, _BaseComponent);
+
     function AfInput(formService, ngZone) {
-        var _this = this;
-
         classCallCheck$1(this, AfInput);
-
-        _initDefineProp$1$1(this, 'text', _descriptor$1$1, this);
-
-        _initDefineProp$1$1(this, 'rule', _descriptor2$1$1, this);
-
-        _initDefineProp$1$1(this, 'container', _descriptor3, this);
-
-        _initDefineProp$1$1(this, 'control', _descriptor4, this);
-
-        this.target = null;
-        this.prop = null;
-        this.name = null;
-
-        this.setValidity = function (valid) {
-            if (_this.control && !_this.control.dirty) {
-                return;
-            }
-            var validity = valid ? '' : 'invalid';
-            _this._inputElement.setCustomValidity(validity);
-            if (!valid) {
-                _this._ngZone.runOutsideAngular(function () {
-                    return _this.setProp(_this.target, _this.prop, undefined);
-                });
-            }
-        };
-
-        this._formService = formService;
-        this._ngZone = ngZone;
-        this._nativeElement = null;
-        this._inputElement = null;
-        this._mdcComponent = null;
+        return possibleConstructorReturn$1(this, (AfInput.__proto__ || Object.getPrototypeOf(AfInput)).call(this, formService, ngZone));
     }
 
     createClass$1$1(AfInput, [{
-        key: 'getProp',
-        value: function getProp(target, prop) {
-            return target[prop];
-        }
-    }, {
-        key: 'setProp',
-        value: function setProp(target, prop, value) {
-            target[prop] = value;
-        }
-    }, {
-        key: 'getErrorNames',
-        value: function getErrorNames() {
-            return Object.keys(this.control.errors || {});
-        }
-    }, {
-        key: 'ngOnInit',
-        value: function ngOnInit() {
-            if (!this.container) {
-                throw new Error('No container');
-            }
-            this._nativeElement = this.container.nativeElement;
-            this._inputElement = this._nativeElement.children[0];
-        }
-    }, {
         key: 'ngAfterViewInit',
         value: function ngAfterViewInit() {
-            this._formService.addControl(this.control, this.name);
+            get$1(AfInput.prototype.__proto__ || Object.getPrototypeOf(AfInput.prototype), 'ngAfterViewInit', this).call(this);
             this._mdcComponent = new MDCTextfield(this._nativeElement);
-        }
-    }, {
-        key: 'ngOnDestroy',
-        value: function ngOnDestroy() {
-            this._mdcComponent && this._mdlComponent.destroy();
-            this._nativeElement = null;
-            this._inputElement = null;
         }
     }]);
     return AfInput;
-}(), (_descriptor$1$1 = _applyDecoratedDescriptor$1$1(_class2$1$1.prototype, 'text', [_dec2$1$1], {
-    enumerable: true,
-    initializer: function initializer() {
-        return null;
-    }
-}), _descriptor2$1$1 = _applyDecoratedDescriptor$1$1(_class2$1$1.prototype, 'rule', [_dec3$1$1], {
-    enumerable: true,
-    initializer: function initializer() {
-        return null;
-    }
-}), _descriptor3 = _applyDecoratedDescriptor$1$1(_class2$1$1.prototype, 'container', [_dec4], {
-    enumerable: true,
-    initializer: function initializer() {
-        return this.container;
-    }
-}), _descriptor4 = _applyDecoratedDescriptor$1$1(_class2$1$1.prototype, 'control', [_dec5], {
-    enumerable: true,
-    initializer: function initializer() {
-        return this.control;
-    }
-})), _class2$1$1)) || _class$2$1);
+}(BaseComponent)) || _class$2$1);
 Reflect.defineMetadata('design:paramtypes', [FormService, NgZone], AfInput);
 
 var _dec;
@@ -76573,6 +76591,7 @@ var WalasAngularMDCModule = (_dec = NgModule({
 
 exports.WalasAngularMDCModule = WalasAngularMDCModule;
 exports.AfInput = AfInput;
+exports.BaseComponent = BaseComponent;
 exports.WalasAngularCoreModule = WalasAngularCoreModule;
 exports.ExtendComponent = ExtendComponent;
 exports.AfForm = AfForm;

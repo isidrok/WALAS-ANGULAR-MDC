@@ -2,7 +2,7 @@ import {NgModule, FormsModule, BrowserModule, WalasAngularCoreModule} from '@wal
 import {AfInput} from './packages';
 
 const ELEMENTS = [
-    AfInput,
+    AfInput
 ];
 const MODULES = [
     WalasAngularCoreModule,
